@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@training.dev
+    DocumentRoot /var/www/training
+    ServerName training.dev
+    ServerAlias www.training.dev
+
+    ErrorLog  /var/log/apache2/training-error_log
+    CustomLog /var/log/apache2/training-access_log common
+</VirtualHost>

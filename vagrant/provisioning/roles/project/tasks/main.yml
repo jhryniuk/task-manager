@@ -1,0 +1,15 @@
+---
+- name: Create apache2 configuration
+  template:
+    src: vhost-configuration.js2
+    dest: /etc/apache2/sites-available/training-configuration.conf
+
+- name: Enable apache2 vhosts
+  file:
+    src: /etc/apache2/sites-available/training-configuration.conf
+    dest: /etc/apache2/sites-enabled/training-configuration.conf
+    state: link
+  notify: restart apache
+
+
+
