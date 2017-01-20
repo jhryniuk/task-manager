@@ -1,0 +1,22 @@
+{
+    "name": "tarnawski/training",
+    "description": "Task Manager",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomasz Tarnawski",
+            "email": "tarnawski27@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "": [
+                "src/"
+            ]
+        }
+    }
+}
