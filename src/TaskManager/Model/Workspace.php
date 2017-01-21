@@ -14,11 +14,25 @@ class Workspace
     private $description;
 
     /**
-     * @return int
+     * Workspace constructor.
+     * @param int $id
+     * @param string $name
+     * @param string $description
      */
-    public function getId() :int
+    public function __construct($id, $name, $description)
     {
-        return $this->id;
+        $this->id = $id;
+        $this->name = $name;
+        $this->description = $description;
+    }
+
+    public static function fromState(array $state): Workspace
+    {
+        return new self(
+            $state['id'],
+            $state['name'],
+            $state['description']
+        );
     }
 
     /**
@@ -30,34 +44,26 @@ class Workspace
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
-    public function getName() :string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name)
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return string
      */
-    public function getDescription() :string
+    public function getDescription(): string
     {
         return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description)
-    {
-        $this->description = $description;
     }
 }
