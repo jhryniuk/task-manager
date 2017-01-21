@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaces>
+    <workspace>
+        <id>1</id>
+        <name>Work</name>
+        <description>Tasks to do in work</description>
+    </workspace>
+    <workspace>
+        <id>2</id>
+        <name>School</name>
+        <description>Tasks to do in school</description>
+    </workspace>
+</workspaces>
