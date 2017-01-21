@@ -4,7 +4,7 @@ namespace TaskManager\Storage\InXml;
 
 use TaskManager\Storage\Storage;
 
-class WorkspaceStorage implements Storage
+class TaskStorage implements Storage
 {
     const PATH = 'data.xml';
 
@@ -21,14 +21,14 @@ class WorkspaceStorage implements Storage
     public function findAll()
     {
         foreach ($this->data as $item) {
-            $workspaces[] = [
+            $tasks[] = [
                 'id' => (int) $item->id,
                 'name' => (string) $item->name,
                 'description' => (string) $item->description
             ];
         }
 
-        return empty($workspaces) ? [] : $workspaces;
+        return empty($tasks) ? [] : $tasks;
     }
 
     /**
@@ -40,7 +40,6 @@ class WorkspaceStorage implements Storage
     {
         foreach ($this->data as $item) {
             if ((int) $item->id == $id) {
-
                 return [
                     'id' => (int)$item->id,
                     'name' => (string)$item->name,
@@ -55,11 +54,11 @@ class WorkspaceStorage implements Storage
     public function persist(array $data): int
     {
         $id = $this->data->count() + 1;
-        $workspaces = $this->data;
-        $workspace = $workspaces->addChild('workspace');
-        $workspace->addChild('id', $id);
-        $workspace->addChild('name', $data['name']);
-        $workspace->addChild('description', $data['description']);
+        $tasks = $this->data;
+        $task = $tasks->addChild('task');
+        $task->addChild('id', $id);
+        $task->addChild('name', $data['name']);
+        $task->addChild('description', $data['description']);
         $this->data->saveXML(self::PATH);
 
         return $id;

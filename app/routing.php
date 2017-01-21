@@ -3,7 +3,7 @@
 return  [
   '/' => [
       'module'      => 'TaskManager',
-      'controller'  => 'Workspace',
+      'controller'  => 'Task',
       'action'      => 'index'
   ]
 ];

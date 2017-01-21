@@ -2,8 +2,8 @@
 
 namespace TaskManager\Storage;
 
-use TaskManager\Storage\InMemory\WorkspaceStorage as InMemoryWorkspaceStorage;
-use TaskManager\Storage\InXml\WorkspaceStorage as InXmlWorkspaceStorage;
+use TaskManager\Storage\InMemory\TaskStorage as InMemoryTaskStorage;
+use TaskManager\Storage\InXml\TaskStorage as InXmlTaskStorage;
 
 class StorageFactory
 {
@@ -14,13 +14,13 @@ class StorageFactory
     {
         switch ($method) {
             case self::IN_MEMORY:
-                return new InMemoryWorkspaceStorage();
+                return new InMemoryTaskStorage();
                 break;
             case self::IN_XML:
-                return new InXmlWorkspaceStorage();
+                return new InXmlTaskStorage();
                 break;
             default:
-                return new InMemoryWorkspaceStorage();
+                return new InMemoryTaskStorage();
         }
     }
 }

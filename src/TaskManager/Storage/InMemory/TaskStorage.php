@@ -4,7 +4,7 @@ namespace TaskManager\Storage\InMemory;
 
 use TaskManager\Storage\Storage;
 
-class WorkspaceStorage implements Storage
+class TaskStorage implements Storage
 {
     /**
      * @var array
@@ -17,7 +17,6 @@ class WorkspaceStorage implements Storage
     private $lastId = 0;
 
     /**
-     * WorkspaceStorage constructor.
      * @param array $data
      */
     public function __construct(array $data = [])
@@ -25,7 +24,9 @@ class WorkspaceStorage implements Storage
         $this->data = $data;
     }
 
-
+    /**
+     * @return array
+     */
     public function findAll()
     {
         return $this->data;
@@ -41,6 +42,10 @@ class WorkspaceStorage implements Storage
         return isset($this->data[$id]) ? $this->data[$id] : null;
     }
 
+    /**
+     * @param array $data
+     * @return int
+     */
     public function persist(array $data): int
     {
         $this->lastId++;

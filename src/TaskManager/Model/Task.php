@@ -14,6 +14,27 @@ class Task
     private $description;
 
     /**
+     * @param int $id
+     * @param string $name
+     * @param string $description
+     */
+    public function __construct($id, $name, $description)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->description = $description;
+    }
+
+    public static function fromState(array $state): Task
+    {
+        return new self(
+            $state['id'],
+            $state['name'],
+            $state['description']
+        );
+    }
+
+    /**
      * @return int
      */
     public function getId() :int
