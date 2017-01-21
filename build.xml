@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="task-manager" default="full-build">
+    <property name="workspace" value="${basedir}" />
+    <property name="sourcedir" value="${basedir}/src" />
+    <property name="builddir" value="${workspace}/app/build" />
+
+    <target name="full-build" depends="prepare,vendors,static-analysis"/>
+    <target name="static-analysis" depends="phploc,phpcs,pdepend,phpcpd,phpmd"/>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${builddir}/logs"/>
+        <mkdir dir="${builddir}/pdepend"/>
+    </target>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${builddir}/logs"/>
+        <delete dir="${builddir}/pdepend"/>
+    </target>
+
+    <target name="vendors" description="Install vendors">
+        <exec executable="composer" failonerror="true">
+            <arg value="install" />
+            <arg value="--ignore-platform-reqs" />
+        </exec>
+    </target>
+
+    <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer">
+        <exec executable="${workspace}/bin/phpcs" failonerror="true">
+            <arg value="--standard=PSR2" />
+            <arg value="-n" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="${workspace}/bin/phploc">
+            <arg value="--log-csv" />
+            <arg value="${builddir}/logs/phploc.csv" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend">
+        <exec executable="${workspace}/bin/pdepend">
+            <arg value="--jdepend-xml=${builddir}/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${builddir}/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${builddir}/pdepend/overview-pyramid.svg" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec executable="${workspace}/bin/phpcpd">
+            <arg value="--log-pmd" />
+            <arg value="${builddir}/logs/pmd-cpd.xml" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="phpmd" description="Perform project mess detection using PHPMD">
+        <exec executable="${workspace}/bin/phpmd">
+            <arg path="${workspace}/src"/>
+            <arg value="xml"/>
+            <arg value="cleancode,codesize,unusedcode" />
+            <arg value="--reportfile"/>
+            <arg path="${builddir}/logs/pmd.xml"/>
+        </exec>
+    </target>
+</project>
