@@ -14,4 +14,3 @@ if (array_key_exists($uri, $routes)) {
 } else {
     header("HTTP/1.0 404 Not Found");
 }
-

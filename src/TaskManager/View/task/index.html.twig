@@ -1,1 +1,13 @@
-<h1>Tomasz {{workspaces}}</h1>
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h2>LIST OF TASKS</h2>
+    {% for task in tasks %}
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ task.name }}</div>
+            <div class="panel-body">
+                {{ task.description }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
