@@ -3,13 +3,14 @@
 namespace TaskManager\Repository;
 
 use TaskManager\Model\Workspace;
-use TaskManager\Storage\InXml\WorkspaceStorage;
+use TaskManager\Storage\Storage;
 
 class WorkspaceRepository
 {
+    /** @var Storage */
     private $persistence;
 
-    public function __construct(WorkspaceStorage $persistence)
+    public function __construct(Storage $persistence)
     {
         $this->persistence = $persistence;
     }

@@ -2,7 +2,9 @@
 
 namespace TaskManager\Storage\InXml;
 
-class WorkspaceStorage
+use TaskManager\Storage\Storage;
+
+class WorkspaceStorage implements Storage
 {
     const PATH = 'data.xml';
 

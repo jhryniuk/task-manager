@@ -2,7 +2,9 @@
 
 namespace TaskManager\Storage\InMemory;
 
-class WorkspaceStorage
+use TaskManager\Storage\Storage;
+
+class WorkspaceStorage implements Storage
 {
     /**
      * @var array
