@@ -2,12 +2,12 @@
 - name: Create apache2 configuration
   template:
     src: vhost-configuration.js2
-    dest: /etc/apache2/sites-available/training-configuration.conf
+    dest: /etc/apache2/sites-available/task-manager-configuration.conf
 
 - name: Enable apache2 vhosts
   file:
-    src: /etc/apache2/sites-available/training-configuration.conf
-    dest: /etc/apache2/sites-enabled/training-configuration.conf
+    src: /etc/apache2/sites-available/task-manager-configuration.conf
+    dest: /etc/apache2/sites-enabled/task-manager-configuration.conf
     state: link
   notify: restart apache
 

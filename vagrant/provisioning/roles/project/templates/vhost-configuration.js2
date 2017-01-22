@@ -1,9 +1,9 @@
 <VirtualHost *:80>
-    ServerAdmin webmaster@training.dev
-    DocumentRoot /var/www/training
-    ServerName training.dev
-    ServerAlias www.training.dev
+    ServerAdmin webmaster@task-manager.dev
+    DocumentRoot /var/www/task-manager
+    ServerName task-manager.dev
+    ServerAlias www.task-manager.dev
 
-    ErrorLog  /var/log/apache2/training-error_log
-    CustomLog /var/log/apache2/training-access_log common
+    ErrorLog  /var/log/apache2/task-manager-error_log
+    CustomLog /var/log/apache2/task-manager-access_log common
 </VirtualHost>
