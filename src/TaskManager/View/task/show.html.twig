@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h2>
+        SINGLE TASK
+        <a href="/tasks" class="btn btn-primary pull-right" role="button">BACK TO LIST</a>
+    </h2>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ task.name }}
+        </div>
+        <div class="panel-body">
+            {{ task.description }}
+        </div>
+    </div>
+{% endblock %}

@@ -18,7 +18,7 @@ class Task
      * @param string $name
      * @param string $description
      */
-    public function __construct($id, $name, $description)
+    public function __construct($id = null, $name = null, $description = null)
     {
         $this->id = $id;
         $this->name = $name;

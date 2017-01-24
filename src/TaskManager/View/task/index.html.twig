@@ -1,10 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h2>LIST OF TASKS</h2>
+    <h2>
+        LIST OF TASKS
+        <a href="/tasks/new" class="btn btn-success pull-right" role="button">CREATE NEW TASK</a>
+    </h2>
+
     {% for task in tasks %}
         <div class="panel panel-default">
-            <div class="panel-heading">{{ task.name }}</div>
+            <div class="panel-heading">
+                <a href="/tasks/{{ task.id }}"> {{ task.name }}</a>
+            </div>
             <div class="panel-body">
                 {{ task.description }}
             </div>
