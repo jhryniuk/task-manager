@@ -2,6 +2,7 @@
 
 namespace TaskManager\Controller;
 
+use TaskManager\Model\Task;
 use TaskManager\Repository\TaskRepository;
 use TaskManager\Storage\StorageFactory;
 
@@ -15,5 +16,36 @@ class TaskController extends BaseController
         $tasks = $taskRepository->getAll();
 
         $this->render('task/index.html.twig', ['tasks' => $tasks]);
+    }
+
+    public function showAction($params)
+    {
+        $storageFactory = new StorageFactory();
+        $storage = $storageFactory->get('xml');
+        $taskRepository = new TaskRepository($storage);
+        $task = $taskRepository->getSingle($params[0]);
+
+        $this->render('task/show.html.twig', ['task' => $task]);
+    }
+
+    public function createAction()
+    {
+        if (isset($_POST['submit'])) {
+            $name = isset($_POST['name']) ? $_POST['name'] : '';
+            $description = isset($_POST['description']) ? $_POST['description'] : '';
+
+            $task = new Task();
+            $task->setName($name);
+            $task->setDescription($description);
+
+            $storageFactory = new StorageFactory();
+            $storage = $storageFactory->get('xml');
+            $taskRepository = new TaskRepository($storage);
+            $taskRepository->save($task);
+
+            $this->indexAction();
+        } else {
+            $this->render('task/create.html.twig');
+        }
     }
 }

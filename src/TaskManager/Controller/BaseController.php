@@ -15,7 +15,7 @@ class BaseController
         $this->twig = new Twig_Environment($loader);
     }
 
-    public function render(string $name, array $array)
+    public function render(string $name, array $array = [])
     {
         echo $this->twig->render($name, $array);
     }
