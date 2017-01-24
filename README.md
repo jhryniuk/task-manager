@@ -1,5 +1,9 @@
-###Getting started
+###Deploys happen automatically
+Every push to develop will deploy a new version of this app.
 
+STAGING: [https://training-tasks.herokuapp.com](https://training-tasks.herokuapp.com)
+
+###Getting started
 
 In order to set application up you must follow by steps:
 
