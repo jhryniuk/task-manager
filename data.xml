@@ -4,10 +4,18 @@
         <id>1</id>
         <name>Work</name>
         <description>Tasks to do in work</description>
+        <priority>low</priority>
     </task>
     <task>
         <id>2</id>
         <name>School</name>
         <description>Tasks to do in school</description>
+        <priority>medium</priority>
+    </task>
+    <task>
+        <id>3</id>
+        <name>Home</name>
+        <description>Tasks to do in home</description>
+        <priority>high</priority>
     </task>
 </tasks>

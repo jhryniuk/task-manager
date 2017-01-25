@@ -7,6 +7,8 @@ use ParameterBag;
 
 class TaskStorage implements Storage
 {
+    const PATH = 'data.xml';
+
     /**
      * @var array
      */
@@ -23,7 +25,8 @@ class TaskStorage implements Storage
             $tasks[] = [
                 'id' => (int) $item->id,
                 'name' => (string) $item->name,
-                'description' => (string) $item->description
+                'description' => (string) $item->description,
+                'priority' => (string)$item->priority
             ];
         }
 
@@ -45,7 +48,8 @@ class TaskStorage implements Storage
             return [
                 'id' => (int)$item->id,
                 'name' => (string)$item->name,
-                'description' => (string)$item->description
+                'description' => (string)$item->description,
+                'priority' => (string)$item->priority
             ];
         }
 
@@ -60,6 +64,7 @@ class TaskStorage implements Storage
         $task->addChild('id', $id);
         $task->addChild('name', $data['name']);
         $task->addChild('description', $data['description']);
+        $task->addChild('priority', $data['priority']);
         $this->data->saveXML(ParameterBag::get('xml_location'));
 
         return $id;

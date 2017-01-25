@@ -7,7 +7,13 @@
     </h2>
 
     {% for task in tasks %}
-        <div class="panel panel-default">
+        {% if task.priority == 'low' %}
+            <div class="panel panel-success">
+        {% elseif task.priority == 'medium' %}
+            <div class="panel panel-info">
+        {% elseif task.priority == 'high' %}
+            <div class="panel panel-danger">
+        {% endif %}
             <div class="panel-heading">
                 <a href="/tasks/{{ task.id }}"> {{ task.name }}</a>
             </div>

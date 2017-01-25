@@ -12,8 +12,16 @@
         </div>
         <div class="form-group">
             <label for="description">Task description:</label>
-            <input type="description" class="form-control" id="description" name="description">
+            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
         </div>
-        <button type="submit" name="submit" class="btn btn-default">Submit</button>
+        <div class="form-group">
+            <label for="priority">Task priority:</label>
+            <select class="form-control" id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+        <button type="submit" name="submit" class="btn btn-success pull-right">CREATE NEW TASK</button>
     </form>
 {% endblock %}

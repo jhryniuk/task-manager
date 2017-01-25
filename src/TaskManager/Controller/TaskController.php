@@ -36,10 +36,12 @@ class TaskController extends BaseController
         } else {
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $description = isset($_POST['description']) ? $_POST['description'] : '';
+            $priority = isset($_POST['priority']) ? $_POST['priority'] : '';
 
             $task = new Task();
             $task->setName($name);
             $task->setDescription($description);
+            $task->setPriority($priority);
 
             $storageFactory = new StorageFactory();
             $storage = $storageFactory->get(ParameterBag::get('storage'));
