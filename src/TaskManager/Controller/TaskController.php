@@ -2,6 +2,7 @@
 
 namespace TaskManager\Controller;
 
+use ParameterBag;
 use TaskManager\Model\Task;
 use TaskManager\Repository\TaskRepository;
 use TaskManager\Storage\StorageFactory;
@@ -11,7 +12,7 @@ class TaskController extends BaseController
     public function indexAction()
     {
         $storageFactory = new StorageFactory();
-        $storage = $storageFactory->get('xml');
+        $storage = $storageFactory->get(ParameterBag::get('storage'));
         $taskRepository = new TaskRepository($storage);
         $tasks = $taskRepository->getAll();
 
@@ -21,7 +22,7 @@ class TaskController extends BaseController
     public function showAction($params)
     {
         $storageFactory = new StorageFactory();
-        $storage = $storageFactory->get('xml');
+        $storage = $storageFactory->get(ParameterBag::get('storage'));
         $taskRepository = new TaskRepository($storage);
         $task = $taskRepository->getSingle($params[0]);
 
@@ -39,7 +40,7 @@ class TaskController extends BaseController
             $task->setDescription($description);
 
             $storageFactory = new StorageFactory();
-            $storage = $storageFactory->get('xml');
+            $storage = $storageFactory->get(ParameterBag::get('storage'));
             $taskRepository = new TaskRepository($storage);
             $taskRepository->save($task);
 
