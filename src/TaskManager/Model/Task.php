@@ -13,16 +13,26 @@ class Task
     /** @var string */
     private $description;
 
+    /** @var string */
+    private $priority;
+
     /**
-     * @param int $id
-     * @param string $name
-     * @param string $description
+     * Task constructor.
+     * @param null $id
+     * @param null $name
+     * @param null $description
+     * @param string $priority
      */
-    public function __construct($id = null, $name = null, $description = null)
-    {
+    public function __construct(
+        $id = null,
+        $name = null,
+        $description = null,
+        $priority = 'medium'
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->priority = $priority;
     }
 
     public static function fromState(array $state): Task
@@ -30,7 +40,8 @@ class Task
         return new self(
             $state['id'],
             $state['name'],
-            $state['description']
+            $state['description'],
+            $state['priority']
         );
     }
 
@@ -80,5 +91,21 @@ class Task
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriority(): string
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param string $priority
+     */
+    public function setPriority(string $priority)
+    {
+        $this->priority = $priority;
     }
 }

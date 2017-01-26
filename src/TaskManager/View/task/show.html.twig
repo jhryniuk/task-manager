@@ -6,7 +6,13 @@
         <a href="/tasks" class="btn btn-primary pull-right" role="button">BACK TO LIST</a>
     </h2>
 
-    <div class="panel panel-default">
+    {% if task.priority == 'low' %}
+        <div class="panel panel-success">
+    {% elseif task.priority == 'medium' %}
+        <div class="panel panel-info">
+    {% elseif task.priority == 'high' %}
+        <div class="panel panel-danger">
+    {% endif %}
         <div class="panel-heading">
             {{ task.name }}
         </div>

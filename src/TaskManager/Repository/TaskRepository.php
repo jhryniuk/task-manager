@@ -51,6 +51,7 @@ class TaskRepository
         $id = $this->persistence->persist([
             'name' => $task->getName(),
             'description' => $task->getDescription(),
+            'priority' => $task->getPriority(),
         ]);
 
         $task->setId($id);
