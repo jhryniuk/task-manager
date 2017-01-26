@@ -34,13 +34,23 @@ class TaskRepository
      */
     public function getSingle(int $id) :Task
     {
-        $arrayData = $this->persistence->find($id);
+        $task = $this->persistence->find($id);
 
-        if (is_null($arrayData)) {
+        if (is_null($task)) {
             throw new \InvalidArgumentException(sprintf('Task with ID %d does not exist', $id));
         }
 
-        return Task::fromState($arrayData);
+        return Task::fromState($task);
+    }
+
+    public function getBy(array $array)
+    {
+        $arrayData = $this->persistence->findBy($array);
+        foreach ($arrayData as $item) {
+            $tasks[] = Task::fromState($item);
+        }
+
+        return empty($tasks) ? [] : $tasks;
     }
 
     /**

@@ -14,6 +14,11 @@ class Router
             'controller'  => 'Task',
             'action'      => 'index'
         ],
+        '/tasks/(?!new|\d+)(\w+)' => [
+            'module'      => 'TaskManager',
+            'controller'  => 'Task',
+            'action'      => 'showByPriority'
+        ],
         '/tasks/(\d+)' => [
             'module'      => 'TaskManager',
             'controller'  => 'Task',

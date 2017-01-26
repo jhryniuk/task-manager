@@ -21,7 +21,11 @@ class TaskStorage implements Storage
      */
     public function __construct(array $data = [])
     {
-        $this->data = $data;
+        $this->data = [[
+            'name' => 'School',
+            'description' => 'Tasks to do in school',
+            'priority' => 'high'
+        ]];
     }
 
     /**
@@ -29,7 +33,16 @@ class TaskStorage implements Storage
      */
     public function findAll()
     {
-        return $this->data;
+        foreach ($this->data as $key => $item) {
+            $tasks[] = [
+                'id' => (int) $key,
+                'name' => (string) $item['name'],
+                'description' => (string) $item['description'],
+                'priority' => (string)$item['priority']
+            ];
+        }
+
+        return empty($tasks) ? [] : $tasks;
     }
 
     /**
@@ -39,7 +52,40 @@ class TaskStorage implements Storage
      */
     public function find(int $id)
     {
-        return isset($this->data[$id]) ? $this->data[$id] : null;
+        if (!isset($this->data[$id])) {
+            return null;
+        }
+
+        return [
+            'id' => (int) $id,
+            'name' => (string) $this->data[$id]['name'],
+            'description' => (string) $this->data[$id]['description'],
+            'priority' => (string)$this->data[$id]['priority']
+        ];
+    }
+
+    /**
+     * @param array $array
+     * @return array|null
+     */
+    public function findBy(array $array)
+    {
+        foreach ($array as $key => $value) {
+            foreach ($this->data as $id => $item) {
+                if ($item[$key] != $value) {
+                    continue;
+                }
+
+                $tasks[] =  [
+                    'id' => (int)$id,
+                    'name' => (string) $this->data[$id]['name'],
+                    'description' => (string) $this->data[$id]['description'],
+                    'priority' => (string)$this->data[$id]['priority']
+                ];
+            }
+        }
+
+        return empty($tasks) ? [] : $tasks;
     }
 
     /**

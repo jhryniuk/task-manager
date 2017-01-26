@@ -3,7 +3,7 @@
 class ParameterBag
 {
     private static $parameters = [
-        'storage'       => 'xml',
+        'storage'       => 'memory',
         'xml_location'  => 'data.xml'
     ];
 
