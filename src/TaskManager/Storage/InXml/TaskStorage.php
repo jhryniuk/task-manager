@@ -3,11 +3,10 @@
 namespace TaskManager\Storage\InXml;
 
 use TaskManager\Storage\Storage;
+use ParameterBag;
 
 class TaskStorage implements Storage
 {
-    const PATH = 'data.xml';
-
     /**
      * @var array
      */
@@ -15,7 +14,7 @@ class TaskStorage implements Storage
 
     public function __construct()
     {
-        $this->data = simplexml_load_file(self::PATH);
+        $this->data = simplexml_load_file(ParameterBag::get('xml_location'));
     }
 
     public function findAll()
@@ -59,7 +58,7 @@ class TaskStorage implements Storage
         $task->addChild('id', $id);
         $task->addChild('name', $data['name']);
         $task->addChild('description', $data['description']);
-        $this->data->saveXML(self::PATH);
+        $this->data->saveXML(ParameterBag::get('xml_location'));
 
         return $id;
     }
