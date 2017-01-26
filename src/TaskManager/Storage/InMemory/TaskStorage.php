@@ -21,11 +21,7 @@ class TaskStorage implements Storage
      */
     public function __construct(array $data = [])
     {
-        $this->data = [[
-            'name' => 'School',
-            'description' => 'Tasks to do in school',
-            'priority' => 'high'
-        ]];
+        $this->data = $data;
     }
 
     /**
