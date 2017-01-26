@@ -31,7 +31,9 @@ class TaskController extends BaseController
 
     public function createAction()
     {
-        if (isset($_POST['submit'])) {
+        if (!isset($_POST['submit'])) {
+            $this->render('task/create.html.twig');
+        } else {
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $description = isset($_POST['description']) ? $_POST['description'] : '';
 
@@ -45,8 +47,6 @@ class TaskController extends BaseController
             $taskRepository->save($task);
 
             $this->indexAction();
-        } else {
-            $this->render('task/create.html.twig');
         }
     }
 }

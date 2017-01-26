@@ -38,13 +38,15 @@ class TaskStorage implements Storage
     public function find(int $id)
     {
         foreach ($this->data as $item) {
-            if ((int) $item->id == $id) {
-                return [
-                    'id' => (int)$item->id,
-                    'name' => (string)$item->name,
-                    'description' => (string)$item->description
-                ];
+            if ((int) $item->id != $id) {
+                continue;
             }
+
+            return [
+                'id' => (int)$item->id,
+                'name' => (string)$item->name,
+                'description' => (string)$item->description
+            ];
         }
 
         return null;
