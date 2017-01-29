@@ -8,5 +8,7 @@ interface Storage
 
     public function find(int $id);
 
+    public function findBy(array $data);
+
     public function persist(array $data);
 }

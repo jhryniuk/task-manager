@@ -19,6 +19,16 @@ class TaskController extends BaseController
         $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 
+    public function showByPriorityAction($params)
+    {
+        $storageFactory = new StorageFactory();
+        $storage = $storageFactory->get(ParameterBag::get('storage'));
+        $taskRepository = new TaskRepository($storage);
+        $tasks = $taskRepository->getBy(['priority' => $params[0]]);
+
+        $this->render('task/index.html.twig', ['tasks' => $tasks]);
+    }
+
     public function showAction($params)
     {
         $storageFactory = new StorageFactory();

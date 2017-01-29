@@ -1,11 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h2>
-        LIST OF TASKS
-        <a href="/tasks/new" class="btn btn-success pull-right" role="button">CREATE NEW TASK</a>
-    </h2>
-
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>LIST OF TASKS</h2>
+        </div>
+        <div class="col-lg-4">
+            <a href="/tasks/low" class="btn btn-success center" role="button">LOW</a>
+            <a href="/tasks/medium" class="btn btn-info" role="button">MEDIUM</a>
+            <a href="/tasks/high" class="btn btn-danger" role="button">HIGH</a>
+            <a href="/tasks" class="btn btn-primary" role="button">RESET</a>
+        </div>
+        <div class="col-lg-4">
+            <a href="/tasks/new" class="btn btn-success pull-right" role="button">CREATE NEW TASK</a>
+        </div>
+    </div>
+    <br>
     {% for task in tasks %}
         {% if task.priority == 'low' %}
             <div class="panel panel-success">
