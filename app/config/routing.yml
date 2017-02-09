@@ -1,0 +1,25 @@
+routes:
+  '/':
+    module: TaskManager
+    controller: Task
+    action: index
+
+  '/tasks':
+    module: TaskManager
+    controller: Task
+    action: index
+
+  '/tasks/(?!new|\d+)(\w+)':
+    module: TaskManager
+    controller: Task
+    action: showByPriority
+
+  '/tasks/(\d+)':
+    module: TaskManager
+    controller: Task
+    action: show
+
+  '/tasks/new':
+    module: TaskManager
+    controller: Task
+    action: create

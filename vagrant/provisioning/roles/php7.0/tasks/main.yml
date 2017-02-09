@@ -21,6 +21,7 @@
     - php7.0-fpm
     - php7.0-mbstring
     - php7.0-xml
+    - php7.0-yaml
 
 - name: Configure PHP
   template: src=php_config.ini.j2 dest=/etc/php/7.0/fpm/conf.d/php_config.ini force=yes
