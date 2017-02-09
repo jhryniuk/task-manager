@@ -50,6 +50,7 @@ class Application
 
     /**
      * @param string $uri
+     * @throws Exception
      */
     public function handle(string $uri)
     {
@@ -61,9 +62,19 @@ class Application
             if (preg_match($pattern, $uri, $output_array)) {
                 $params = array_slice($output_array,1);
                 $class = sprintf('\%s\Controller\%sController', $route['module'], $route['controller']);
+
+                if (!class_exists($class)) {
+                    throw new Exception(sprintf('Controller "%s" not found', $class));
+                }
+
                 $action = sprintf('%sAction', $route['action']);
                 $controller = new $class($this->container);
-                $controller->$action($params);
+
+                if (!method_exists($controller, $action)) {
+                    throw new Exception(sprintf('Action "%s" not found', $action));
+                }
+
+                echo $controller->$action($params);
             }
         }
     }

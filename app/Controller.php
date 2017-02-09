@@ -25,6 +25,7 @@ class Controller
     public function render(string $name, array $array = [])
     {
         $templateEngine = $this->get('twig');
-        echo $templateEngine->render($name, $array);
+
+        return $templateEngine->render($name, $array);
     }
 }
