@@ -31,11 +31,7 @@ class Application
     public function loadServices()
     {
         $this->container['twig'] = function () {
-            foreach ($this->container['templates'] as $template) {
-                $templates[] = sprintf('%s/../%s', __DIR__, $template);
-            }
-            $loader = new Twig_Loader_Filesystem(isset($templates) ? $templates : []);
-
+            $loader = new Twig_Loader_Filesystem($this->container['templates'], __DIR__.'/../src/');
             return new Twig_Environment($loader);
         };
 
