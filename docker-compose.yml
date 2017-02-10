@@ -1,5 +1,5 @@
-server:
-  image: task-manager
+php:
+  build: .
   ports:
     - "8081:80"
   volumes:
