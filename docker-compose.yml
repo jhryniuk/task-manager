@@ -1,0 +1,6 @@
+server:
+  image: task-manager
+  ports:
+    - "8081:80"
+  volumes:
+    - .:/var/www/html
