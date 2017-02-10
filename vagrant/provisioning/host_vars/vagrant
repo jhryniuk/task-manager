@@ -1,0 +1,10 @@
+---
+# PROJECT
+project_name: task-manager
+project_root: "/var/www/{{ project_name }}"
+database_name: "{{ project_name }}"
+
+# DATABASE
+mysql_port: 3306
+mysql_user: root
+mysql_pass: rootpassword

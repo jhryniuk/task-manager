@@ -11,5 +11,17 @@
     state: link
   notify: restart apache
 
+- name: Create a new database
+  mysql_db: name="{{ database_name }}" state=present login_password="{{ mysql_pass }}" login_user="{{ mysql_user }}"
+
+- name: Copy database dump file
+  copy:
+    src: "{{ role_path }}/db/task_manager.sql"
+    dest: "/tmp"
+
+- name: Database dump file to remote host and restore
+  mysql_db: name="{{ database_name }}" state=import target="/tmp/task_manager.sql" login_password="{{ mysql_pass }}" login_user="{{ mysql_user }}"
+
+
 
 
