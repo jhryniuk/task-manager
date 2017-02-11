@@ -24,7 +24,7 @@ class TaskController extends Controller
         /** @var Storage $storage */
         $storage = $this->get('task_storage_in_xml');
         $taskRepository = new TaskRepository($storage);
-        $tasks = $taskRepository->getBy(['priority' => $params[0]]);
+        $tasks = $taskRepository->getBy('priority', $params[0]);
 
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }

@@ -1,22 +1,26 @@
 <?php
 
-namespace TaskManager\Storage\InDatabase;
+namespace TaskManager\Storage\InDB;
 
+use PDO;
 use TaskManager\Storage\Storage;
 
 class TaskStorage implements Storage
 {
-    /** @var  \PDO */
+    /** @var PDO */
     private $db;
 
-    public function __construct(\PDO $pdo)
+    public function __construct(PDO $pdo)
     {
         $this->db = $pdo;
     }
 
     public function findAll()
     {
-        $results = $this->db->query('SELECT * FROM task');
+        $sth = $this->db->prepare('SELECT * FROM task');
+        $sth->execute();
+        $results = $sth->fetchAll();
+
         foreach ($results as $item) {
             $tasks[] = [
                 'id' => (int) $item['id'],
@@ -38,7 +42,8 @@ class TaskStorage implements Storage
     {
         $sth = $this->db->prepare('SELECT * FROM task WHERE id = :id');
         $sth->bindParam(':id', $id);
-        $result = $sth->execute();
+        $sth->execute();
+        $result = $sth->fetch();
 
         return [
             'id' => (int)$result['id'],
@@ -48,20 +53,34 @@ class TaskStorage implements Storage
         ];
     }
 
-    public function findBy(array $data)
+    public function findBy(string $name, string $value)
     {
+        $sth = $this->db->prepare('SELECT * FROM task WHERE '.$name.' = :value');
+        $sth->bindParam(':value', $value);
+        $sth->execute();
+        $results = $sth->fetchAll();
 
+        foreach ($results as $item) {
+            $tasks[] = [
+                'id' => (int) $item['id'],
+                'name' => (string) $item['name'],
+                'description' => (string) $item['description'],
+                'priority' => (string)$item['priority']
+            ];
+        }
+
+        return empty($tasks) ? [] : $tasks;
     }
 
     public function persist(array $data): int
     {
         $sth = $this->db->prepare('INSERT INTO task (name, description, priority) VALUES(:name, :description, :priority)');
-        $sth->bindParams([
-            ':name' => $data['name'],
-            ':description' => $data['description'],
-            ':priority' => $data['priority']
-        ]);
+        $sth->bindParam(':name', $data['name']);
+        $sth->bindParam(':description', $data['description']);
+        $sth->bindParam(':priority', $data['priority']);
 
         $sth->execute();
+
+        return $this->db->lastInsertId();
     }
 }
