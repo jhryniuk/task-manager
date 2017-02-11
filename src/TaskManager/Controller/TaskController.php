@@ -12,7 +12,7 @@ class TaskController extends Controller
     public function indexAction()
     {
         /** @var Storage $storage */
-        $storage = $this->get('task_storage_in_xml');
+        $storage = $this->get('task_storage_in_db');
         $taskRepository = new TaskRepository($storage);
         $tasks = $taskRepository->getAll();
 
@@ -22,7 +22,7 @@ class TaskController extends Controller
     public function showByPriorityAction($params)
     {
         /** @var Storage $storage */
-        $storage = $this->get('task_storage_in_xml');
+        $storage = $this->get('task_storage_in_db');
         $taskRepository = new TaskRepository($storage);
         $tasks = $taskRepository->getBy('priority', $params[0]);
 
@@ -32,7 +32,7 @@ class TaskController extends Controller
     public function showAction($params)
     {
         /** @var Storage $storage */
-        $storage = $this->get('task_storage_in_xml');
+        $storage = $this->get('task_storage_in_db');
         $taskRepository = new TaskRepository($storage);
         $task = $taskRepository->getSingle($params[0]);
 
@@ -54,7 +54,7 @@ class TaskController extends Controller
             $task->setPriority($priority);
 
             /** @var Storage $storage */
-            $storage = $this->get('task_storage_in_xml');
+            $storage = $this->get('task_storage_in_db');
             $taskRepository = new TaskRepository($storage);
             $taskRepository->save($task);
 
