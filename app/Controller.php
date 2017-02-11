@@ -2,24 +2,21 @@
 
 class Controller
 {
-    protected $container;
+    /** @var Container */
+    private $container;
 
     /**
      * Controller constructor.
      * @param $container
      */
-    public function __construct($container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }
 
     public function get(string $name)
     {
-        if (is_string($this->container[$name])) {
-            return $this->container[$name];
-        }
-
-        return $this->container[$name]();
+        return $this->container->get($name);
     }
 
     public function render(string $name, array $array = [])

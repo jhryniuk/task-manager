@@ -10,38 +10,25 @@ class Application
 
     public function __construct()
     {
-        $this->container = new Container();
-        $this->loadServices();
+        $this->container = Container::buildContainer();
     }
 
     public function loadParameters(string $path)
     {
         $data = yaml_parse_file($path);
-        foreach ($data['parameters'] as $name => $value) {
-            $this->container[$name] = $value;
-        }
+        $this->container->registerParameters($data['parameters']);
+    }
+
+    public function loadServices(string $path)
+    {
+        $data = yaml_parse_file($path);
+        $this->container->registerServices($data['services']);
     }
 
     public function loadRoutes(string $path)
     {
         $data = yaml_parse_file($path);
         $this->routes = $data['routes'];
-    }
-
-    public function loadServices()
-    {
-        $this->container['twig'] = function () {
-            $loader = new Twig_Loader_Filesystem($this->container['templates'], __DIR__.'/../src/');
-            return new Twig_Environment($loader);
-        };
-
-        $this->container['task_storage_in_xml'] = function () {
-            return new TaskManager\Storage\InXml\TaskStorage($this->container['xml_location']);
-        };
-
-        $this->container['task_storage_in_memory'] = function () {
-            return new TaskManager\Storage\InMemory\TaskStorage();
-        };
     }
 
     /**
@@ -70,8 +57,14 @@ class Application
                     throw new Exception(sprintf('Action "%s" not found', $action));
                 }
 
-                echo $controller->$action($params);
+                $response = $controller->$action($params);
             }
         }
+
+        if (!isset($response)) {
+            throw new Exception(sprintf('Route "%s" not found', $uri));
+        }
+
+        echo $response;
     }
 }

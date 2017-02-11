@@ -2,11 +2,12 @@
 
 namespace TaskManager\Controller;
 
+use Controller;
 use TaskManager\Model\Task;
 use TaskManager\Repository\TaskRepository;
 use TaskManager\Storage\Storage;
 
-class TaskController extends \Controller
+class TaskController extends Controller
 {
     public function indexAction()
     {
