@@ -4,7 +4,8 @@
     <property name="sourcedir" value="${basedir}/src" />
     <property name="builddir" value="${workspace}/app/build" />
 
-    <target name="full-build" depends="prepare,vendors,static-analysis"/>
+    <target name="full-build" depends="prepare,vendors,static-analysis, unit-tests"/>
+    <target name="unit-tests" depends="phpspec"/>
     <target name="static-analysis" depends="phploc,phpcs,pdepend,phpcpd,phpmd"/>
 
     <target name="prepare" depends="clean" description="Prepare for build">
@@ -21,6 +22,13 @@
         <exec executable="composer" failonerror="true">
             <arg value="install" />
             <arg value="--ignore-platform-reqs" />
+        </exec>
+    </target>
+
+    <target name="phpspec" description="Run PHPSpec test">
+        <exec executable="${basedir}/bin/phpspec" failonerror="true">
+            <arg value="run" />
+            <arg path="${sourcedir}" />
         </exec>
     </target>
 
