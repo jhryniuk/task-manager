@@ -1,26 +1,26 @@
 routes:
-
-  '/':
+  home:
+    pattern: '/'
     module: TaskManager
     controller: Task
     action: index
-
-  '/tasks':
+  task_list:
+    pattern: '/tasks'
     module: TaskManager
     controller: Task
     action: index
-
-  '/tasks/(?!new|\d+)(\w+)':
+  task_by_priority:
+    pattern: '/tasks/(?!new|\d+)(\w+)'
     module: TaskManager
     controller: Task
     action: showByPriority
-
-  '/tasks/(\d+)':
+  task_single:
+    pattern: '/tasks/(\d+)'
     module: TaskManager
     controller: Task
     action: show
-
-  '/tasks/new':
+  task_create:
+    pattern: '/tasks/new'
     module: TaskManager
     controller: Task
     action: create

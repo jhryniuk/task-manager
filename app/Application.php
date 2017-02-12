@@ -38,8 +38,9 @@ class Application
      */
     public function handle(string $uri)
     {
-        foreach ($this->routes as $pattern => $route) {
-            $pattern = str_replace('/', '\/', $pattern);
+        foreach ($this->routes as $name => $route) {
+
+            $pattern = str_replace('/', '\/', $route['pattern']);
             $pattern = sprintf('/%s$/', $pattern);
 
             if (preg_match($pattern, $uri, $output_array)) {
