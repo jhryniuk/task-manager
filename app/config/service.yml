@@ -1,0 +1,19 @@
+services:
+
+  twig_loader:
+    class: Twig_Loader_Filesystem
+    arguments:
+      - '%templates'
+
+  twig:
+    class: Twig_Environment
+    arguments:
+      - '@twig_loader'
+
+  task_storage_in_memory:
+    class: TaskManager\Storage\InMemory\TaskStorage
+
+  task_storage_in_xml:
+    class: TaskManager\Storage\InXml\TaskStorage
+    arguments:
+      - '%xml_location'

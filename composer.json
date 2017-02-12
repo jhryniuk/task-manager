@@ -9,11 +9,12 @@
         }
     ],
     "autoload": {
-      "psr-4": {
-        "": [
-          "src/"
-        ]
-      }
+      "psr-4": { "": ["src/"] },
+      "classmap": [
+        "app/Application.php",
+        "app/Container.php",
+        "app/Controller.php"
+      ]
     },
     "require": {
         "php": "^7.0",

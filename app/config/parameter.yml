@@ -1,0 +1,4 @@
+parameters:
+  templates:
+    - './src/TaskManager/View'
+  xml_location: data.xml
