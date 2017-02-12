@@ -38,12 +38,11 @@ class Application
     public function handle(string $uri)
     {
         foreach ($this->routes as $pattern => $route) {
-
             $pattern = str_replace('/', '\/', $pattern);
             $pattern = sprintf('/%s$/', $pattern);
 
             if (preg_match($pattern, $uri, $output_array)) {
-                $params = array_slice($output_array,1);
+                $params = array_slice($output_array, 1);
                 $class = sprintf('\%s\Controller\%sController', $route['module'], $route['controller']);
 
                 if (!class_exists($class)) {

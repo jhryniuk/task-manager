@@ -42,7 +42,7 @@ class Container implements ContainerInterface
             $r = new ReflectionClass($className);
             $obj = $r->newInstanceArgs($arg);
 
-            $this->container[$name] = function () use ($obj){
+            $this->container[$name] = function () use ($obj) {
                 return $obj;
             };
         }
@@ -51,12 +51,10 @@ class Container implements ContainerInterface
     private function getArguments(array $arguments)
     {
         foreach ($arguments as $argument) {
-
-            if(substr($argument, 0,1) == "@") {
+            if (substr($argument, 0, 1) == "@") {
                 $arg[] = $this->container[substr($argument, 1)]();
             }
-
-            if(substr($argument, 0,1) == "%") {
+            if (substr($argument, 0, 1) == "%") {
                 $arg[] = $this->container[substr($argument, 1)];
             }
         }
