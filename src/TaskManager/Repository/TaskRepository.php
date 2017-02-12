@@ -43,9 +43,9 @@ class TaskRepository
         return Task::fromState($task);
     }
 
-    public function getBy(string $name, string $value)
+    public function getBy(array $array)
     {
-        $arrayData = $this->persistence->findBy($name, $value);
+        $arrayData = $this->persistence->findBy($array);
         foreach ($arrayData as $item) {
             $tasks[] = Task::fromState($item);
         }
