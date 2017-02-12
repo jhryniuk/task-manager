@@ -10,6 +10,13 @@ services:
     arguments:
       - '@twig_loader'
 
+  pdo:
+    class: PDO
+    arguments:
+      - '%database_dsn'
+      - '%database_user'
+      - '%database_password'
+
   task_storage_in_memory:
     class: TaskManager\Storage\InMemory\TaskStorage
 
@@ -17,3 +24,8 @@ services:
     class: TaskManager\Storage\InXml\TaskStorage
     arguments:
       - '%xml_location'
+
+  task_storage_in_db:
+    class: TaskManager\Storage\InDB\TaskStorage
+    arguments:
+      - '@pdo'

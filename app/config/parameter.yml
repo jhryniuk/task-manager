@@ -2,3 +2,6 @@ parameters:
   templates:
     - './src/TaskManager/View'
   xml_location: data.xml
+  database_dsn: mysql:host=localhost;dbname=task-manager;charset=utf8mb4
+  database_user: root
+  database_password: rootpassword

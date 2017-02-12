@@ -1,8 +1,8 @@
 <VirtualHost *:80>
-    ServerAdmin webmaster@task-manager.dev
-    DocumentRoot /var/www/task-manager
-    ServerName task-manager.dev
-    ServerAlias www.task-manager.dev
+    ServerAdmin webmaster@{{ project_name }}.dev
+    DocumentRoot {{ project_root }}
+    ServerName {{ project_name }}.dev
+    ServerAlias www.{{ project_name }}.dev
 
     <Directory "/var/www/task-manager">
         Options Indexes FollowSymLinks
@@ -13,6 +13,6 @@
         Allow from all
     </Directory>
 
-    ErrorLog  /var/log/apache2/task-manager-error_log
-    CustomLog /var/log/apache2/task-manager-access_log common
+    ErrorLog  /var/log/apache2/{{ project_name }}-error_log
+    CustomLog /var/log/apache2/{{ project_name }}-access_log common
 </VirtualHost>

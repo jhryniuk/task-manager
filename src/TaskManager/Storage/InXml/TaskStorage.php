@@ -55,24 +55,23 @@ class TaskStorage implements Storage
     }
 
     /**
-     * @param array $array
-     * @return array|null
+     * @param string $name
+     * @param string $value
+     * @return array
      */
-    public function findBy(array $array)
+    public function findBy(string $name, string $value)
     {
-        foreach ($array as $key => $value) {
-            foreach ($this->data as $item) {
-                if ($item->$key != $value) {
-                    continue;
-                }
-
-                $tasks[] =  [
-                    'id' => (int)$item->id,
-                    'name' => (string)$item->name,
-                    'description' => (string)$item->description,
-                    'priority' => (string)$item->priority
-                ];
+        foreach ($this->data as $item) {
+            if ($item->$name != $value) {
+                continue;
             }
+
+            $tasks[] = [
+                'id' => (int)$item->id,
+                'name' => (string)$item->name,
+                'description' => (string)$item->description,
+                'priority' => (string)$item->priority
+            ];
         }
 
         return empty($tasks) ? [] : $tasks;

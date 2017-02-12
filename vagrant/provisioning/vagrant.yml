@@ -1,9 +1,12 @@
 --- 
 - name: Prepare basic env for php apps on all nodes
-  hosts: 127.0.0.1
+  hosts: vagrant
   remote_user: vagrant
+  connection: local
   become: yes
+  become_method: sudo
   roles:
     - apache
-    - php7.0
+    - php7.1
+    - mysql
     - project
