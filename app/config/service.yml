@@ -17,6 +17,11 @@ services:
       - '%database_user'
       - '%database_password'
 
+  app_extension:
+    class: AppExtension
+    arguments:
+      - '%env'
+
   task_storage_in_memory:
     class: TaskManager\Storage\InMemory\TaskStorage
 

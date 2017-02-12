@@ -19,6 +19,16 @@ class Container implements ContainerInterface
         return $this->container[$name]();
     }
 
+    public function set(string $name, string $value)
+    {
+        if (array_key_exists($name, $this->container)) {
+            return false;
+        }
+        $this->container[$name] = $value;
+
+        return true;
+    }
+
     public function has(string $name)
     {
         return array_key_exists($name, $this->container);

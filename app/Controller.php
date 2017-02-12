@@ -21,7 +21,10 @@ class Controller
 
     public function render(string $name, array $array = [])
     {
+        /** @var Twig_Environment $templateEngine */
         $templateEngine = $this->get('twig');
+        $appExtension = $this->get('app_extension');
+        $templateEngine->addExtension($appExtension);
 
         return $templateEngine->render($name, $array);
     }

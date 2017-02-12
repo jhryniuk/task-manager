@@ -8,6 +8,6 @@ parameters:
   xml_location: data.xml
 
   # Database connection
-  database_dsn: mysql:host=localhost;dbname=task-manager;charset=utf8mb4
+  database_dsn: mysql:host=localhost;dbname=task-manager-dev;charset=utf8mb4
   database_user: root
   database_password: rootpassword

@@ -8,9 +8,10 @@ class Application
     /** @var array */
     private $routes;
 
-    public function __construct()
+    public function __construct($environment = 'prod')
     {
         $this->container = Container::buildContainer();
+        $this->container->set('env', $environment);
     }
 
     public function loadParameters(string $path)

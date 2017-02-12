@@ -6,13 +6,13 @@
             <h2>LIST OF TASKS</h2>
         </div>
         <div class="col-lg-4">
-            <a href="/tasks/low" class="btn btn-success center" role="button">LOW</a>
-            <a href="/tasks/medium" class="btn btn-info" role="button">MEDIUM</a>
-            <a href="/tasks/high" class="btn btn-danger" role="button">HIGH</a>
-            <a href="/tasks" class="btn btn-primary" role="button">RESET</a>
+            <a href="{{ '/tasks/low' | env }}" class="btn btn-success center" role="button">LOW</a>
+            <a href="{{ '/tasks/medium' | env }}" class="btn btn-info" role="button">MEDIUM</a>
+            <a href="{{ '/tasks/high' | env }}" class="btn btn-danger" role="button">HIGH</a>
+            <a href="{{ '/tasks' | env }}" class="btn btn-primary" role="button">RESET</a>
         </div>
         <div class="col-lg-4">
-            <a href="/tasks/new" class="btn btn-success pull-right" role="button">CREATE NEW TASK</a>
+            <a href="{{ '/tasks/new' | env }}" class="btn btn-success pull-right" role="button">CREATE NEW TASK</a>
         </div>
     </div>
     <br>
@@ -25,7 +25,7 @@
             <div class="panel panel-danger">
         {% endif %}
             <div class="panel-heading">
-                <a href="/tasks/{{ task.id }}"> {{ task.name }}</a>
+                <a href="{{ ('/tasks/' ~ task.id) | env }}"> {{ task.name }}</a>
             </div>
             <div class="panel-body">
                 {{ task.description }}

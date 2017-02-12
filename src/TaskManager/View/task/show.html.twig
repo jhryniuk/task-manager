@@ -3,7 +3,7 @@
 {% block content %}
     <h2>
         SINGLE TASK
-        <a href="/tasks" class="btn btn-primary pull-right" role="button">BACK TO LIST</a>
+        <a href="{{ '/tasks' | env }}" class="btn btn-primary pull-right" role="button">BACK TO LIST</a>
     </h2>
     <br>
     {% if task.priority == 'low' %}
