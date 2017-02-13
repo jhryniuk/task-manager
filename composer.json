@@ -13,7 +13,8 @@
       "classmap": [
         "app/Application.php",
         "app/Container.php",
-        "app/Controller.php"
+        "app/Controller.php",
+        "app/ContainerInterface.php"
       ]
     },
     "require": {
