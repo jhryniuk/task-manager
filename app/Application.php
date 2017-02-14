@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Yaml\Yaml;
+
 class Application
 {
     /** @var Container */
@@ -15,19 +17,19 @@ class Application
 
     public function loadParameters(string $path)
     {
-        $data = yaml_parse_file($path);
+        $data = Yaml::parse(file_get_contents($path));
         $this->container->registerParameters($data['parameters']);
     }
 
     public function loadServices(string $path)
     {
-        $data = yaml_parse_file($path);
+        $data = Yaml::parse(file_get_contents($path));
         $this->container->registerServices($data['services']);
     }
 
     public function loadRoutes(string $path)
     {
-        $data = yaml_parse_file($path);
+        $data = Yaml::parse(file_get_contents($path));
         $this->routes = $data['routes'];
     }
 
