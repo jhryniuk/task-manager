@@ -18,16 +18,16 @@ class Task
 
     /**
      * Task constructor.
-     * @param null $id
-     * @param null $name
-     * @param null $description
+     * @param int $id
+     * @param string $name
+     * @param string $description
      * @param string $priority
      */
     public function __construct(
-        $id = null,
-        $name = null,
-        $description = null,
-        $priority = 'medium'
+        int $id = 0,
+        string $name = '',
+        string $description = '',
+        string $priority = 'medium'
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -45,65 +45,41 @@ class Task
         );
     }
 
-    /**
-     * @return int
-     */
-    public function getId() :int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(int $id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName() :string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
     public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription() :string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
     public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
-    public function getPriority(): string
+    public function getPriority() : ?string
     {
         return $this->priority;
     }
 
-    /**
-     * @param string $priority
-     */
     public function setPriority(string $priority)
     {
         $this->priority = $priority;

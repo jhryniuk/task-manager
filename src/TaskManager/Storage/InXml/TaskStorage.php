@@ -17,8 +17,13 @@ class TaskStorage implements Storage
         $this->data = simplexml_load_file($this->filePath);
     }
 
-    public function findAll()
+    public function findAll(): array
     {
+        if (empty($this->data)) {
+            return [];
+        }
+
+        $tasks = [];
         foreach ($this->data as $item) {
             $tasks[] = [
                 'id' => (int) $item->id,
@@ -28,15 +33,10 @@ class TaskStorage implements Storage
             ];
         }
 
-        return empty($tasks) ? [] : $tasks;
+        return $tasks;
     }
 
-    /**
-     * @param int $id
-     *
-     * @return array|null
-     */
-    public function find(int $id)
+    public function find(int $id): ?array
     {
         foreach ($this->data as $item) {
             if ((int) $item->id != $id) {
@@ -54,13 +54,13 @@ class TaskStorage implements Storage
         return null;
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @return array
-     */
-    public function findBy(string $name, string $value)
+    public function findBy(string $name, string $value): array
     {
+        if (empty($this->data)) {
+            return [];
+        }
+
+        $tasks = [];
         foreach ($this->data as $item) {
             if ($item->$name != $value) {
                 continue;
@@ -74,7 +74,7 @@ class TaskStorage implements Storage
             ];
         }
 
-        return empty($tasks) ? [] : $tasks;
+        return $tasks;
     }
 
     public function persist(array $data): int

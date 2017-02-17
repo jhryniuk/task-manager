@@ -74,7 +74,8 @@ class TaskStorage implements Storage
 
     public function persist(array $data): int
     {
-        $sth = $this->db->prepare('INSERT INTO task (name, description, priority) VALUES(:name, :description, :priority)');
+        $sth = $this
+            ->db->prepare('INSERT INTO task (name, description, priority) VALUES(:name, :description, :priority)');
         $sth->bindParam(':name', $data['name']);
         $sth->bindParam(':description', $data['description']);
         $sth->bindParam(':priority', $data['priority']);

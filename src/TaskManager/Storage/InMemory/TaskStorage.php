@@ -24,11 +24,13 @@ class TaskStorage implements Storage
         $this->data = $data;
     }
 
-    /**
-     * @return array
-     */
-    public function findAll()
+    public function findAll(): array
     {
+        if (empty($this->data)) {
+            return [];
+        }
+
+        $tasks = [];
         foreach ($this->data as $key => $item) {
             $tasks[] = [
                 'id' => (int) $key,
@@ -38,15 +40,10 @@ class TaskStorage implements Storage
             ];
         }
 
-        return empty($tasks) ? [] : $tasks;
+        return $tasks;
     }
 
-    /**
-     * @param int $id
-     *
-     * @return array|null
-     */
-    public function find(int $id)
+    public function find(int $id): ?array
     {
         if (!isset($this->data[$id])) {
             return null;
@@ -60,13 +57,13 @@ class TaskStorage implements Storage
         ];
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @return array
-     */
-    public function findBy(string $name, string $value)
+    public function findBy(string $name, string $value): array
     {
+        if (empty($this->data)) {
+            return [];
+        }
+
+        $tasks = [];
         foreach ($this->data as $id => $item) {
             if ($item[$name] != $value) {
                 continue;
@@ -80,13 +77,9 @@ class TaskStorage implements Storage
             ];
         }
 
-        return empty($tasks) ? [] : $tasks;
+        return $tasks;
     }
 
-    /**
-     * @param array $data
-     * @return int
-     */
     public function persist(array $data): int
     {
         $this->lastId++;
