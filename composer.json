@@ -23,6 +23,9 @@
         "symfony/yaml": "^3.2"
     },
     "require-dev": {
+      "phpspec/phpspec": "~2.0",
+      "coduo/php-matcher": "2.0.1",
+      "phpunit/phpunit": "~4.3",
       "squizlabs/php_codesniffer": "~2.0",
       "phploc/phploc": "~2.1",
       "phpmd/phpmd" : "~2.1",

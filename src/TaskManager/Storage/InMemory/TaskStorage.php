@@ -12,11 +12,6 @@ class TaskStorage implements Storage
     private $data = [];
 
     /**
-     * @var int
-     */
-    private $lastId = 0;
-
-    /**
      * @param array $data
      */
     public function __construct(array $data = [])
@@ -89,11 +84,11 @@ class TaskStorage implements Storage
      */
     public function persist(array $data): int
     {
-        $this->lastId++;
+        $nextId = count($this->data) + 1;
 
-        $data['id'] = $this->lastId;
-        $this->data[$this->lastId] = $data;
+        $data['id'] = $nextId;
+        $this->data[$nextId] = $data;
 
-        return $this->lastId;
+        return $nextId;
     }
 }
