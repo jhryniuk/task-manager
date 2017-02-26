@@ -18,7 +18,13 @@ class Application
     public function loadParameters(string $path)
     {
         $data = Yaml::parse(file_get_contents($path));
-        $this->container->registerParameters($data['parameters']);
+        $parameters = $data['parameters'];
+
+        foreach ($data['parameters'] as $name => $parameter) {
+            $parameters[$name] = (getenv($name)!== false) ? getenv($name) : $parameter;
+        }
+
+        $this->container->registerParameters($parameters);
     }
 
     public function loadServices(string $path)
