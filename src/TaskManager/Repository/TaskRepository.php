@@ -28,10 +28,6 @@ class TaskRepository
         return empty($tasks) ? [] : $tasks;
     }
 
-    /**
-     * @param int $id
-     * @return Task
-     */
     public function getSingle(int $id) :Task
     {
         $task = $this->persistence->find($id);
@@ -43,6 +39,11 @@ class TaskRepository
         return Task::fromState($task);
     }
 
+    /**
+     * @param string $name
+     * @param string $value
+     * @return Task[]|array
+     */
     public function getBy(string $name, string $value)
     {
         $arrayData = $this->persistence->findBy($name, $value);
